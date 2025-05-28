@@ -6,6 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+     - 31.97.52.53.nip.io
+    secretName: ssl-cert-staging
   rules:
     - host: srv836417.hstgr.cloud
       http:
