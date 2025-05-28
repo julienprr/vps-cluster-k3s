@@ -4,8 +4,12 @@ metadata:
   name: portfolio
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-http
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - srv836417.hstgr.cloud
   rules:
     - host: srv836417.hstgr.cloud
       http:
