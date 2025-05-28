@@ -15,6 +15,14 @@ spec:
     - host: srv836417.hstgr.cloud
       http:
         paths:
+         - path: /.well-known/acme-challenge/
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+
           - path: /
             pathType: Prefix
             backend:
