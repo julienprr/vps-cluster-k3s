@@ -8,8 +8,9 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-    - hosts:
-        - srv836417.hstgr.cloud
+  - hosts:
+      - srv836417.hstgr.cloud
+    secretName: portfolio-tls
   rules:
     - host: srv836417.hstgr.cloud
       http:
