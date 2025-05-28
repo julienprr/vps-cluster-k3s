@@ -8,21 +8,13 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-      - srv836417.hstgr.cloud
-    secretName: portfolio-tls
+    - hosts:
+        - srv836417.hstgr.cloud
+      secretName: portfolio-tls
   rules:
     - host: srv836417.hstgr.cloud
       http:
         paths:
-         - path: /.well-known/acme-challenge/
-            pathType: Prefix
-            backend:
-              service:
-                name: portfolio
-                port:
-                  number: 80
-
           - path: /
             pathType: Prefix
             backend:
