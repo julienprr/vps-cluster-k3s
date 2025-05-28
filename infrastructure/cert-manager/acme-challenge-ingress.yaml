@@ -12,9 +12,9 @@ spec:
       http:
         paths:
           - path: /.well-known/acme-challenge/
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
-                name: portfolio
+                name: cert-manager
                 port:
-                  number: 80
+                  number: 8080
