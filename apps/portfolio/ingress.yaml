@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
      - 31.97.52.53.nip.io
-    secretName: ssl-cert-staging
+    secretName: ssl-cert-production
   rules:
     - host: srv836417.hstgr.cloud
       http:
