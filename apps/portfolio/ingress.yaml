@@ -11,7 +11,7 @@ spec:
      - 31.97.52.53.nip.io
     secretName: ssl-cert-production
   rules:
-    - host: srv836417.hstgr.cloud
+    - host: 31.97.52.53.nip.io
       http:
         paths:
           - path: /
