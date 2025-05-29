@@ -4,13 +4,14 @@ metadata:
   name: portfolio
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-     - 31.97.52.53.nip.io
-     - srv836417.hstgr.cloud
-    secretName: ssl-cert-production
+    - hosts:
+        - 31.97.52.53.nip.io
+        - srv836417.hstgr.cloud
+      secretName: ssl-cert-production
   rules:
     - host: 31.97.52.53.nip.io
       http:
@@ -23,12 +24,12 @@ spec:
                 port:
                   number: 80
     - host: srv836417.hstgr.cloud
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: portfolio
-              port:
-                number: 80
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
