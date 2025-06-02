@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: portfolio
-  labels:
-    app: portfolio
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -15,7 +14,7 @@ spec:
         app: portfolio
     spec:
       containers:
-        - name: portfolio
-          image: julienprr/portfolio:latest
-          ports:
-            - containerPort: 80
+      - name: portfolio
+        image: julienprr/portfolio:latest
+        ports:
+        - containerPort: 80
