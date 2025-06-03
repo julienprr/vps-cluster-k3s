@@ -12,7 +12,7 @@ spec:
     - hosts:
         - dev.julienprr.com
         - dev.www.julienprr.com
-      secretName: ssl-cert-dev
+      secretName: ssl-cert-staging
   rules:
     - host: julienprr.com
       http:
