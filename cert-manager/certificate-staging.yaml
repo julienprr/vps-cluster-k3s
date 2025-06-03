@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: ssl-cert-staging
-  namespace: default
+  namespace: dev
 spec:
   secretName: ssl-cert-staging
   issuerRef:
@@ -10,5 +10,5 @@ spec:
     kind: ClusterIssuer
   commonName: julienprr.com
   dnsNames:
-     - julienprr.com
-     - www.julienprr.com
+     - dev.julienprr.com
+     - www.dev.julienprr.com

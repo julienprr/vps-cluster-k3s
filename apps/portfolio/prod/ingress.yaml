@@ -10,11 +10,11 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - 31.97.52.53.nip.io
-        - srv836417.hstgr.cloud
+        - julienprr.com
+        - www.julienprr.com
       secretName: ssl-cert-production
   rules:
-    - host: 31.97.52.53.nip.io
+    - host: julienprr.com
       http:
         paths:
           - path: /
@@ -24,7 +24,7 @@ spec:
                 name: portfolio
                 port:
                   number: 80
-    - host: srv836417.hstgr.cloud
+    - host: www.julienprr.com
       http:
         paths:
           - path: /

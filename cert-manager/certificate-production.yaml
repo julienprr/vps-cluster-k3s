@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: ssl-cert-production
-  namespace: default
+  namespace: prod
 spec:
   secretName: ssl-cert-production
   issuerRef:
