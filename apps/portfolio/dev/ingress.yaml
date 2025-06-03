@@ -17,6 +17,13 @@ spec:
     - host: dev.julienprr.com
       http:
         paths:
+          - path: /.well-known/acme-challenge/
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:
@@ -27,6 +34,13 @@ spec:
     - host: www.dev.julienprr.com
       http:
         paths:
+          - path: /.well-known/acme-challenge/
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:
