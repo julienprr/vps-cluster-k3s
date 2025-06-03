@@ -11,7 +11,7 @@ spec:
   tls:
     - hosts:
         - dev.julienprr.com
-        - dev.www.julienprr.com
+        - www.dev.julienprr.com
       secretName: ssl-cert-staging
   rules:
     - host: julienprr.com
