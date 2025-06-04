@@ -8,7 +8,10 @@ spec:
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
-  commonName: julienprr.com
+  commonName: dev.julienprr.com
   dnsNames:
-     - dev.julienprr.com
-     - www.dev.julienprr.com
+    - dev.julienprr.com
+    - www.dev.julienprr.com
+    - dev.portfolio.julienprr.com
+    - dev.play-manager-api.julienprr.com
+    - dev.play-manager.julienprr.com

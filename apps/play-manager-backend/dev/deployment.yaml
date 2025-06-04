@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: play-manager-backend
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: play-manager-backend
+  template:
+    metadata:
+      labels:
+        app: play-manager-backend
+    spec:
+      containers:
+        - name: backend
+          image: julienprr/play-manager-backend:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: play-manager-backend-config
+            - secretRef:
+                name: play-manager-backend-secrets

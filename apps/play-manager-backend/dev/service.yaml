@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: play-manager-backend
+  namespace: dev
+spec:
+  selector:
+    app: play-manager-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP

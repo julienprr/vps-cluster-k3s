@@ -10,5 +10,8 @@ spec:
     kind: ClusterIssuer
   commonName: julienprr.com
   dnsNames:
-     - julienprr.com
-     - www.julienprr.com
+    - julienprr.com
+    - www.julienprr.com
+    - portfolio.julienprr.com
+    - play-manager-api.julienprr.com
+    - play-manager.julienprr.com
