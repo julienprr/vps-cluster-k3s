@@ -12,7 +12,7 @@ spec:
     - hosts:
         - play-manager-api.julienprr.com
         - www.play-manager-api.julienprr.com
-      secretName: ssl-cert-production
+      secretName: ssl-cert-play-manager-backend
   rules:
     - host: play-manager-api.julienprr.com
       http:
