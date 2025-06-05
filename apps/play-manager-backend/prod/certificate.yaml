@@ -10,4 +10,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - play-manager-api.julienprr.com
-    - www.play-manager.julienprr.com
+    - www.play-manager-api.julienprr.com
