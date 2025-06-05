@@ -8,7 +8,6 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: julienprr.com
   dnsNames:
     - play-manager-api.julienprr.com
     - www.play-manager.julienprr.com
