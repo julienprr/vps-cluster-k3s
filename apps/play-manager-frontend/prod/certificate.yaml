@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ssl-cert-play-manager-frontend
+  namespace: prod
+spec:
+  secretName: ssl-cert-play-manager-frontend
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  dnsNames:
+    - play-manager.julienprr.com
+    - www.play-manager.julienprr.com

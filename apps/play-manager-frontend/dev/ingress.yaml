@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: play-manager-frontend-ingress
+  namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - dev.play-manager.julienprr.com
+        - www.dev.play-manager.julienprr.com
+      secretName: ssl-cert-play-manager-frontend
+  rules:
+    - host: dev.play-manager.julienprr.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: play-manager-frontend
+                port:
+                  number: 80
+    - host: www.dev.play-manager.julienprr.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: play-manager-frontend
+                port:
+                  number: 80
