@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ssl-cert-play-manager-backend
+  namespace: dev
+spec:
+  secretName: ssl-cert-play-manager-backend
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - dev.play-manager-api.julienprr.com
+    - www.dev.play-manager-api.julienprr.com
