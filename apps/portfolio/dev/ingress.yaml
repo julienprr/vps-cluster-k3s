@@ -5,14 +5,16 @@ metadata:
   namespace: dev
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - dev.julienprr.com
         - www.dev.julienprr.com
-      secretName: ssl-cert-staging
+        - dev.portfolio.julienprr.com
+        - www.dev.portfolio.julienprr.com
+      secretName: ssl-cert-dev
   rules:
     - host: dev.julienprr.com
       http:
@@ -41,6 +43,26 @@ spec:
                 name: portfolio
                 port:
                   number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+    - host: dev.portfolio.julienprr.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+    - host: www.dev.portfolio.julienprr.com
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:

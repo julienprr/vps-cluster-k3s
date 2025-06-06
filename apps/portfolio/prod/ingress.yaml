@@ -12,6 +12,8 @@ spec:
     - hosts:
         - julienprr.com
         - www.julienprr.com
+        - portfolio.julienprr.com
+        - www.portfolio.julienprr.com
       secretName: ssl-cert-production
   rules:
     - host: julienprr.com
@@ -41,6 +43,27 @@ spec:
                 name: portfolio
                 port:
                   number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+    - host: portfolio.julienprr.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+
+    - host: www.portfolio.julienprr.com
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:

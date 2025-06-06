@@ -1,17 +1,16 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: ssl-cert-staging
+  name: ssl-cert-dev
   namespace: dev
 spec:
-  secretName: ssl-cert-staging
+  secretName: ssl-cert-dev
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-produduction
     kind: ClusterIssuer
   commonName: dev.julienprr.com
   dnsNames:
     - dev.julienprr.com
     - www.dev.julienprr.com
     - dev.portfolio.julienprr.com
-    - dev.play-manager-api.julienprr.com
-    - dev.play-manager.julienprr.com
+    - www.dev.portfolio.julienprr.com
