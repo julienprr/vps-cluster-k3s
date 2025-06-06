@@ -5,14 +5,14 @@ metadata:
   namespace: dev
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - dev.play-manager-api.julienprr.com
         - www.dev.play-manager-api.julienprr.com
-      secretName: ssl-cert-staging
+      secretName: ssl-cert-play-manager-backend
   rules:
     - host: dev.play-manager-api.julienprr.com
       http:
