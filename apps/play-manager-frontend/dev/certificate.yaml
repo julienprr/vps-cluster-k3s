@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: ssl-cert-play-manager-frontend
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-production
     kind: ClusterIssuer
   dnsNames:
     - dev.play-manager.julienprr.com
