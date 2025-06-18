@@ -19,7 +19,5 @@ spec:
           ports:
             - containerPort: 8000
           envFrom:
-            - configMapRef:
-                name: play-manager-backend-config
             - secretRef:
                 name: play-manager-backend-secrets
