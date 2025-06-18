@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spotify-profile-frontend-ingress
+  namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - dev.spotify-profile.julienprr.com
+        - www.dev.spotify-profile.julienprr.com
+      secretName: ssl-cert-spotify-profile-frontend
+  rules:
+    - host: dev.spotify-profile.julienprr.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: spotify-profile-frontend
+                port:
+                  number: 80
+    - host: www.dev.spotify-profile.julienprr.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: spotify-profile-frontend
+                port:
+                  number: 80

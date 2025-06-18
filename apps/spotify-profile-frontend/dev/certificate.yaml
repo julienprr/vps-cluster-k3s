@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ssl-cert-spotify-profile-frontend
+  namespace: dev
+spec:
+  secretName: ssl-cert-spotify-profile-frontend
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  dnsNames:
+    - dev.spotify-profile.julienprr.com
+    - www.dev.spotify-profile.julienprr.com
