@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: kibana-tls
   issuerRef:
-    name: letsencrypt-prod
+    name: letsencrypt-production
     kind: ClusterIssuer
   commonName: kibana.julienprr.com
   dnsNames:
