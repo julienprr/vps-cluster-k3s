@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -e
 
 echo "🔧 Création du namespace 'logging'..."
