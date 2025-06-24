@@ -8,7 +8,6 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
-spec:
   tls:
     - hosts:
         - kibana.julienprr.com
