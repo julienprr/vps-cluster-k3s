@@ -19,7 +19,7 @@ spec:
     - host: dev.julienprr.com
       http:
         paths:
-          - path: /.well-known/acme-challenge/
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -36,7 +36,7 @@ spec:
     - host: www.dev.julienprr.com
       http:
         paths:
-          - path: /.well-known/acme-challenge/
+          - path: /
             pathType: Prefix
             backend:
               service:
