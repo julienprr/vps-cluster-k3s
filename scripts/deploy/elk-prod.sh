@@ -1,7 +1,7 @@
 set -e
 
 echo "Création du namespace 'logging'..."
-kubectl apply -f ../../../infrastructure/namespaces/logging.yaml
+kubectl apply -f infrastructure/namespaces/logging.yaml
 
 echo "Déploiement du certificat TLS pour kibana.julienprr.com..."
 kubectl apply -f certificate.yaml
