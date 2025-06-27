@@ -11,4 +11,7 @@ echo "Dépôts Helm ajoutés avec succès."
 echo "Mise à jour des index..."
 helm repo update
 
+helm upgrade --install sealed-secrets sealed-secrets/sealed-secrets \
+  --namespace kube-system
+
 echo "Repos Helm mis à jour."
