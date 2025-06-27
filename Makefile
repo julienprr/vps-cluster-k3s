@@ -39,8 +39,11 @@ deploy-prod:
 # LOGGING / ELK
 # =======================
 
-deploy-elk:
+deploy-elk: kibana-secret
 	bash scripts/deploy/elk-prod.sh
+
+kibana-secret:
+	kubectl apply -f apps/elk/kibana-sealed-secret.yaml
 
 # =======================
 # AIDE
