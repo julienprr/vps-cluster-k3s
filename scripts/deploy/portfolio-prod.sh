@@ -1,6 +1,6 @@
 ### DEPLOYMENT SCRIPT: PORTFOLIO PROD ###
 echo "[PORTFOLIO PROD] Création du namespace 'portfolio'..."
-kubectl apply -f ../../../infrastructure/namespaces/prod.yaml
+kubectl apply -f ../../infrastructure/namespaces/prod.yaml
 
 echo "[PORTFOLIO PROD] Déploiement du certificat TLS..."
 kubectl apply -f ../../apps/portfolio/prod/certificate.yaml
