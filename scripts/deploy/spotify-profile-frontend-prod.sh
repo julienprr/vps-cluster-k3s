@@ -8,12 +8,12 @@ echo "[SPOTIFY PROFILE FRONTEND PROD] Création du namespace 'spotify-profile'..
 kubectl apply -f "$SCRIPT_DIR/../../infrastructure/namespaces/prod.yaml"
 
 echo "[SPOTIFY PROFILE FRONTEND PROD] Déploiement du certificat TLS..."
-kubectl apply -f "$SCRIPT_DIR/../../apps/spotify-profile/frontend/prod/certificate.yaml"
+kubectl apply -f "$SCRIPT_DIR/../../apps/spotify-profile-frontend/prod/certificate.yaml"
 
 echo "[SPOTIFY PROFILE FRONTEND PROD] Déploiement de l'ingress..."
-kubectl apply -f "$SCRIPT_DIR/../../apps/spotify-profile/frontend/prod/ingress.yaml"
+kubectl apply -f "$SCRIPT_DIR/../../apps/spotify-profile-frontend/prod/ingress.yaml"
 
 echo "[SPOTIFY PROFILE FRONTEND PROD] Déploiement des ressources Kubernetes..."
-kubectl apply -f "$SCRIPT_DIR/../../apps/spotify-profile/frontend/prod/"
+kubectl apply -f "$SCRIPT_DIR/../../apps/spotify-profile-frontend/prod/"
 
 echo "[SPOTIFY PROFILE FRONTEND PROD] Déploiement terminé."
