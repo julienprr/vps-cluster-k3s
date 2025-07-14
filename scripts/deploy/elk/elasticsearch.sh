@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-APP_DIR="$(cd "$SCRIPT_DIR/../../apps/elk/elasticsearch" && pwd)"
+APP_DIR="$(realpath "$(dirname "$0")/../../../apps/elk/elasticsearch")"
 
 echo "[ELASTICSEARCH] Installation d'Elasticsearch via Helm..."
 helm upgrade --install elasticsearch "$APP_DIR" -n logging -f "$APP_DIR/values.yaml"
