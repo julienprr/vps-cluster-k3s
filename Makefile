@@ -42,6 +42,18 @@ deploy-prod:
 deploy-elk:
 	bash scripts/deploy/elk-prod.sh
 
+deploy-logstash:
+	bash scripts/deploy/elk/logstash
+
+deploy-filebeat:
+	bash scripts/deploy/elk/filebeat
+
+deploy-elasticsearch:
+	bash scripts/deploy/elk/elasticsearch
+
+deploy-kibana:
+	bash scripts/deploy/elk/kibana
+
 kibana-secret:
 	kubectl apply -f apps/elk/kibana-sealed-secret.yaml
 
