@@ -3,7 +3,6 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-
 ### DEPLOYMENT SCRIPT: PLAY MANAGER BACKEND DEV ###
 echo "[PLAY MANAGER BACKEND DEV] Création du namespace 'play-manager'..."
 kubectl apply -f "$SCRIPT_DIR/../../infrastructure/namespaces/dev.yaml"
