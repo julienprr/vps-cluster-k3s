@@ -39,7 +39,7 @@ deploy-prod:
 # LOGGING / ELK
 # =======================
 
-deploy-elk: kibana-secret
+deploy-elk:
 	bash scripts/deploy/elk-prod.sh
 
 kibana-secret:
