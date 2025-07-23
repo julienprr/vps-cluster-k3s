@@ -25,7 +25,11 @@ logstashPipeline:
     output {
       elasticsearch {
         hosts => ["https://elasticsearch-master:9200"]
+        ssl => true
+        cacert => "/usr/share/logstash/config/certs/ca.crt"
+        index => "logstash-%{+YYYY.MM.dd}"
       }
+      stdout { codec => rubydebug }
     }
 
 # Allows you to add any pattern files in your custom pattern dir
@@ -132,15 +136,14 @@ persistence:
   annotations: {}
 
 extraVolumes:
-  []
-  # - name: extras
-  #   emptyDir: {}
+  - name: elastic-certs
+    secret:
+      secretName: elasticsearch-master-certs
 
 extraVolumeMounts:
-  []
-  # - name: extras
-  #   mountPath: /usr/share/extras
-  #   readOnly: true
+  - name: elastic-certs
+    mountPath: /usr/share/logstash/config/certs
+    readOnly: true
 
 extraContainers:
   []
