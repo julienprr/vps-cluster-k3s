@@ -27,22 +27,11 @@ logstashPipeline:
       if [kubernetes][labels][app] == "play-manager-backend" {
         json {
           source => "message"
-          target => "json"
-        }
-
-        mutate {
-          add_field => {
-            "timestamp" => "%{[json][@timestamp]}"
-            "log.level" => "%{[json][log.level]}"
-            "message" => "%{[json][message]}"
-            "host.name" => "%{[json][host.name]}"
-            "service.name" => "%{[json][service.name]}"
-          }
-          remove_field => ["json"]
+          target => ""
         }
 
         date {
-          match => ["timestamp", "ISO8601"]
+          match => ["@timestamp", "ISO8601"]
           target => "@timestamp"
         }
       }
