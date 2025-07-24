@@ -13,6 +13,7 @@ metadata:
       add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
       add_header Referrer-Policy "no-referrer" always;
       add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+      add_header Content-Security-Policy "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none';" always;
 spec:
   ingressClassName: nginx
   tls:
