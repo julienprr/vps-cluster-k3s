@@ -22,6 +22,32 @@ logstashPipeline:
         port => 5044
       }
     }
+
+    filter {
+      if [kubernetes][labels][app] == "play-manager-backend" {
+        json {
+          source => "message"
+          target => "json"
+        }
+
+        mutate {
+          add_field => {
+            "timestamp" => "%{[json][@timestamp]}"
+            "log.level" => "%{[json][log.level]}"
+            "message" => "%{[json][message]}"
+            "host.name" => "%{[json][host.name]}"
+            "service.name" => "%{[json][service.name]}"
+          }
+          remove_field => ["json"]
+        }
+
+        date {
+          match => ["timestamp", "ISO8601"]
+          target => "@timestamp"
+        }
+      }
+    }
+
     output {
       elasticsearch {
         hosts => ["https://elasticsearch-master:9200"]
@@ -31,7 +57,10 @@ logstashPipeline:
         cacert => "/usr/share/logstash/config/certs/ca.crt"
         index => "logstash-%{+YYYY.MM.dd}"
       }
-      stdout { codec => rubydebug }
+
+      stdout {
+        codec => rubydebug
+      }
     }
 
 # Allows you to add any pattern files in your custom pattern dir
