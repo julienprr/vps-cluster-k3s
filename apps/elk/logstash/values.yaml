@@ -23,12 +23,6 @@ logstashPipeline:
       }
     }
 
-    mutate {
-      gsub => [
-        "message", "\u001B\\[[0-9;]*[mGK]", ""
-      ]
-    }
-
     filter {
       if [kubernetes][labels][app] == "play-manager-backend" {
         json {
