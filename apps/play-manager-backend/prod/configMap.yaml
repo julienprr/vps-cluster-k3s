@@ -6,4 +6,4 @@ metadata:
 data:
   PORT: "8000"
   LOG_LEVEL: "error,warn,log"
-  FRONTEND_URL: "https://dev.spotify-profile.julienprr.com"
+  FRONTEND_URL: "https://spotify-profile.julienprr.com"
