@@ -14,7 +14,6 @@ metadata:
       add_header Referrer-Policy "no-referrer" always;
       add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
       more_clear_headers "Content-Security-Policy";
-      add_header Content-Security-Policy "default-src 'self'; connect-src 'self' https://play-manager-api.julienprr.com" always;
 spec:
   ingressClassName: nginx
   tls:
