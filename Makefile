@@ -8,7 +8,10 @@ SHELL := /bin/bash
 # INFRASTRUCTURE
 # =======================
 
-init:
+install-ingress-nginx:
+	bash scripts/init/install-ingress-nginx.sh
+
+init-helm-repos:
 	bash scripts/init/add-helm-repos.sh
 
 
