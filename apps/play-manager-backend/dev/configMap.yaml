@@ -5,5 +5,6 @@ metadata:
   namespace: dev
 data:
   PORT: "8000"
+  NODE_ENV: "staging"
   LOG_LEVEL: "error,warn,log,debug,verbose"
   FRONTEND_URL: "https://dev.spotify-profile.julienprr.com"
