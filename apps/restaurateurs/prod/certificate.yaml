@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rssl-cert-restaurateur-backend
+  namespace: prod
+spec:
+  secretName: restaurateurs-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: restaurateurs.example.com
+  dnsNames:
+    - restaurateurs.julienprr.com
+    - www.restaurateurs.julienprr.com

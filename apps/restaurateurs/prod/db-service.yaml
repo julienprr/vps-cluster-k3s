@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurateurs-db
+  namespace: prod
+spec:
+  # Service sans adresse IP propre : les clients joignent directement le pod.
+  # C'est la forme attendue par un StatefulSet.
+  clusterIP: None
+  selector:
+    app: restaurateurs-db
+  ports:
+    - port: 5432
+      targetPort: 5432

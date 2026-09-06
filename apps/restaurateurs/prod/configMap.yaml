@@ -1,0 +1,28 @@
+# Réglages non sensibles de l'application.
+# Ce qui est secret (mots de passe, clé SMTP) vit dans le SealedSecret.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restaurateurs-config
+  namespace: prod
+data:
+  PORT: "8080"
+
+  # Le service Postgres, résolu à l'intérieur du namespace.
+  DB_URL: jdbc:postgresql://restaurateurs-db:5432/restaurateurs
+
+  # Relais SMTP Brevo.
+  SMTP_HOST: smtp-relay.brevo.com
+  SMTP_PORT: "587"
+  SMTP_AUTH: "true"
+  SMTP_STARTTLS: "true"
+
+  # ATTENTION : cette adresse sert à construire les liens de connexion envoyés
+  # par email. Si elle ne correspond pas exactement au domaine public, tous les
+  # liens seront inutilisables, et sans aucun message d'erreur.
+  APP_BASE_URL: https://restaurateurs.example.com
+
+  # Le cookie de session n'est plus émis qu'en HTTPS.
+  COOKIE_SECURE: "true"
+  # Les liens magiques ne doivent jamais apparaître dans les journaux en prod.
+  LOG_MAGIC_LINK: "false"

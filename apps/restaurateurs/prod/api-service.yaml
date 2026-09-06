@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurateurs-api
+  namespace: prod
+spec:
+  selector:
+    app: restaurateurs-api
+  ports:
+    - port: 80
+      targetPort: 8080

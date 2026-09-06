@@ -1,0 +1,78 @@
+# Sauvegarde quotidienne de la base.
+#
+# C'est la contrepartie de l'auto-hébergement : personne d'autre ne le fera.
+# Les sauvegardes restent sur le VPS, elles ne protègent donc pas d'une perte
+# totale de la machine. Pour ça, récupère-les régulièrement chez toi :
+#
+#   kubectl -n prod cp $(kubectl -n prod get pod -l app=restaurateurs-backup \
+#     -o name | head -1 | cut -d/ -f2):/backups ./sauvegardes
+#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restaurateurs-backups
+  namespace: prod
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restaurateurs-db-backup
+  namespace: prod
+spec:
+  # Tous les jours à 3 h 30.
+  schedule: "30 3 * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  # Si une sauvegarde traîne, ne pas en lancer une seconde par-dessus.
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: restaurateurs-backup
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: postgres:16-alpine
+              env:
+                - name: PGHOST
+                  value: restaurateurs-db
+                - name: PGDATABASE
+                  value: restaurateurs
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: restaurateurs-secrets
+                      key: DB_USER
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: restaurateurs-secrets
+                      key: DB_PASSWORD
+              command:
+                - sh
+                - -c
+                - |
+                  set -e
+                  FICHIER="/backups/restaurateurs-$(date +%F-%H%M).sql.gz"
+                  echo "Sauvegarde vers $FICHIER"
+                  pg_dump | gzip > "$FICHIER"
+                  echo "Taille : $(du -h "$FICHIER" | cut -f1)"
+                  # Rotation : on ne garde que les 14 derniers jours.
+                  find /backups -name 'restaurateurs-*.sql.gz' -mtime +14 -delete
+                  echo "Sauvegardes présentes :"
+                  ls -1 /backups | tail -5
+              volumeMounts:
+                - name: backups
+                  mountPath: /backups
+          volumes:
+            - name: backups
+              persistentVolumeClaim:
+                claimName: restaurateurs-backups
