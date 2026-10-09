@@ -20,7 +20,7 @@ data:
   # ATTENTION : cette adresse sert à construire les liens de connexion envoyés
   # par email. Si elle ne correspond pas exactement au domaine public, tous les
   # liens seront inutilisables, et sans aucun message d'erreur.
-  APP_BASE_URL: https://restaurateurs.example.com
+  APP_BASE_URL: https://restaurateurs.julienprr.com
 
   # Le cookie de session n'est plus émis qu'en HTTPS.
   COOKIE_SECURE: "true"
