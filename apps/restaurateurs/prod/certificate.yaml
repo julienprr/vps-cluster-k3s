@@ -1,14 +1,16 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: rssl-cert-restaurateur-backend
+  name: restaurateurs-tls
   namespace: prod
 spec:
   secretName: restaurateurs-tls
   issuerRef:
-    name: letsencrypt-prod
+    # Nom réel du ClusterIssuer sur ce cluster, vérifié le 9 octobre 2026.
+    name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: restaurateurs.example.com
+  # Un seul nom : www.restaurateurs.julienprr.com n'existe pas en DNS, et
+  # cert-manager doit valider chaque nom demandé. Un seul nom invalide fait
+  # échouer toute la demande, et Let's Encrypt limite les tentatives.
   dnsNames:
     - restaurateurs.julienprr.com
-    - www.restaurateurs.julienprr.com

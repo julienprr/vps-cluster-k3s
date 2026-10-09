@@ -35,7 +35,7 @@ kubectl -n prod create secret generic restaurateurs-secrets \
   --from-literal=SMTP_PASSWORD="$SMTP_PASSWORD" \
   --from-literal=MAIL_FROM="$MAIL_FROM" \
   --dry-run=client -o yaml \
-  | kubeseal --format yaml > "$SORTIE"
+  | kubeseal --controller-name=sealed-secrets --controller-namespace=kube-system --format yaml > "$SORTIE"
 
 echo
 echo "SealedSecret écrit dans $SORTIE"
