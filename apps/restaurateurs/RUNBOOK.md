@@ -154,6 +154,26 @@ gunzip -c restaurateurs-2026-10-24-0330.sql.gz \
 | 7 octobre 2027 | la clé SMTP Brevo expire | plus aucun email, donc plus aucune connexion, **sans alerte** |
 | automatique | certificat HTTPS | cert-manager renouvelle seul |
 
+## Accès au serveur
+
+**Par clé uniquement**, depuis le 24 octobre 2026. Les mots de passe sont
+refusés pour tous les utilisateurs.
+
+Si un jour tu dois vérifier ou modifier la configuration SSH, retiens que
+`sshd` applique **la première** valeur rencontrée, pas la dernière, et que les
+fichiers de `/etc/ssh/sshd_config.d/` sont lus avant le fichier principal, par
+ordre alphabétique. Un `50-cloud-init.conf` l'emporte donc sur un
+`60-cloudimg-settings.conf` et sur `sshd_config` lui-même.
+
+La seule source de vérité est la configuration effective :
+
+```bash
+sshd -T | grep -i passwordauthentication
+```
+
+`ssh_pwauth: false` est posé dans `/etc/cloud/cloud.cfg.d/` pour que cloud-init
+ne réactive pas les mots de passe à un redémarrage.
+
 ## À ne pas faire
 
 **Ne pas augmenter `replicas` de l'API.** Les connexions temps réel vivent en
