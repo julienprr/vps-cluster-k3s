@@ -7,6 +7,13 @@ Tout ce qu'il faut pour déployer, diagnostiquer et réparer.
 - Dépôts : `restaurateurs-api`, `restaurateurs-web`, et celui-ci
 - Ce dépôt sur le VPS : `/opt/projects/vps-cluster-k3s`
 
+Les commandes ci-dessous utilisent `$VPS` pour l'accès au serveur. Définis-le
+une fois par session, il n'a pas sa place dans un dépôt public :
+
+```bash
+export VPS=utilisateur@adresse-du-vps
+```
+
 ## Règle de base
 
 **On modifie depuis le Mac, on applique depuis le VPS.**
@@ -108,7 +115,7 @@ kubectl -n prod rollout restart deployment/restaurateurs-api
 Puis récupérer le fichier scellé sur le Mac pour le versionner :
 
 ```bash
-scp julienprr@31.97.52.53:/opt/projects/vps-cluster-k3s/apps/restaurateurs/prod/sealed-secrets.yaml \
+scp $VPS:/opt/projects/vps-cluster-k3s/apps/restaurateurs/prod/sealed-secrets.yaml \
     ~/workspaces/vps/vps-cluster-k3s/apps/restaurateurs/prod/
 ```
 
