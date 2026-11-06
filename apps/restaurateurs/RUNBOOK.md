@@ -207,6 +207,18 @@ ne réactive pas les mots de passe à un redémarrage.
 
 ## À ne pas faire
 
+**Ne pas appliquer `api-deployment.yaml` sans repousser l'API ensuite.** Le
+manifeste dit `restaurateurs-api:latest`, la CI déploie le tag du commit : un
+`kubectl apply` remet la production sur le `latest` gardé en cache par le
+nœud (`IfNotPresent`), qui peut être ancien. Constaté le 6 novembre 2026.
+Après un `apply`, vérifier l'image et, au besoin, relancer le dernier
+workflow de l'API :
+
+```bash
+kubectl -n prod get deployment restaurateurs-api \
+  -o jsonpath='{.spec.template.spec.containers[0].image}'
+```
+
 **Ne pas augmenter `replicas` de l'API.** Les connexions temps réel vivent en
 mémoire : avec deux répliques, un membre connecté à l'une ne verrait pas les
 votes émis sur l'autre, et rien ne le signalerait.
