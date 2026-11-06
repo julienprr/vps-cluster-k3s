@@ -17,5 +17,12 @@ noms correspondent exactement aux variables d'environnement lues par l'API :
 | `SMTP_PASSWORD` | valeur de la clé SMTP Brevo |
 | `MAIL_FROM` | adresse d'expédition, son domaine doit être validé chez Brevo |
 
+Un second secret, `restaurateurs-admin`, contient une seule clé,
+`ADMIN_TOKEN` : le jeton des routes `/api/admin/**` (en-tête
+`X-Admin-Token`). Il est généré par
+`scripts/deploy/seal-restaurateurs-admin.sh`, et vit à part pour pouvoir le
+changer sans retaper les autres valeurs. Le Deployment de l'API l'exige :
+l'appliquer avant lui.
+
 Le StatefulSet Postgres lit `DB_USER` et `DB_PASSWORD` pour créer son compte :
 une seule source de vérité, pas de valeur à tenir synchronisée à deux endroits.

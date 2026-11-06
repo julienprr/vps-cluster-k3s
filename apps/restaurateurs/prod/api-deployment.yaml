@@ -26,6 +26,10 @@ spec:
                 name: restaurateurs-config
             - secretRef:
                 name: restaurateurs-secrets
+            # Jeton des routes /api/admin/**. Obligatoire : sans lui, le pod
+            # ne démarre pas, plutôt que de tourner avec ces routes en 404.
+            - secretRef:
+                name: restaurateurs-admin
           startupProbe:
             httpGet:
               path: /api/health

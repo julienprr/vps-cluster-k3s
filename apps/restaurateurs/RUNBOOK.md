@@ -86,6 +86,7 @@ kubectl -n prod get certificate restaurateurs-tls
 | `CrashLoopBackOff` | démarrage en échec | `logs --previous` |
 | Les emails n'arrivent plus | clé Brevo expirée ou révoquée | `logs` pour l'erreur SMTP |
 | Lien de connexion qui ne mène nulle part | `APP_BASE_URL` | `exec -- printenv APP_BASE_URL` |
+| `CreateContainerConfigError` | secret `restaurateurs-admin` absent | `get secret restaurateurs-admin` |
 | Les votes n'arrivent pas en direct | mise en tampon de l'Ingress | les annotations `proxy-buffering` |
 | Pas de HTTPS | certificat non délivré | `describe certificate restaurateurs-tls` |
 
@@ -118,6 +119,36 @@ Puis récupérer le fichier scellé sur le Mac pour le versionner :
 scp $VPS:/opt/projects/vps-cluster-k3s/apps/restaurateurs/prod/sealed-secrets.yaml \
     ~/workspaces/vps/vps-cluster-k3s/apps/restaurateurs/prod/
 ```
+
+### Le jeton d'administration
+
+À part, dans `restaurateurs-admin` : `ADMIN_TOKEN`, exigé par les routes
+`/api/admin/**` (clôture des sorties à la main, annonce de version). Le
+script le génère lui-même et l'affiche une seule fois : le ranger aussitôt.
+
+```bash
+cd /opt/projects/vps-cluster-k3s
+./scripts/deploy/seal-restaurateurs-admin.sh
+kubectl apply -f apps/restaurateurs/prod/sealed-admin-secret.yaml
+kubectl -n prod get secret restaurateurs-admin   # le contrôleur l'a déchiffré
+```
+
+Le pod ne le voit qu'après redémarrage. Pour vérifier sans afficher le jeton
+(65 attendu : 64 caractères et le retour à la ligne) :
+
+```bash
+kubectl -n prod exec deployment/restaurateurs-api -- printenv ADMIN_TOKEN | wc -c
+```
+
+Puis rapatrier le fichier scellé sur le Mac, comme l'autre :
+
+```bash
+scp $VPS:/opt/projects/vps-cluster-k3s/apps/restaurateurs/prod/sealed-admin-secret.yaml \
+    ~/workspaces/vps/vps-cluster-k3s/apps/restaurateurs/prod/
+```
+
+**Le Deployment de l'API exige ce secret.** S'il manque, le pod reste en
+`CreateContainerConfigError` : appliquer le secret, et il démarre.
 
 Le contrôleur s'appelle `sealed-secrets` dans `kube-system`, d'où les options
 `--controller-name` et `--controller-namespace` dans le script.
